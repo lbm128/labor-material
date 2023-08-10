@@ -1,19 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
+import { TotalsContext } from "../App";
 
 const Material = () => {
-  const [calculated, setCalculated] = useState(0);
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
   const [sqftGal, setSqftGal] = useState(0);
+  const [totals, setTotals] = useContext(TotalsContext);
 
   const handleCalculate = () => {
     const gallonsNeeded = ((length * width) / sqftGal).toFixed(2);
-    setCalculated(gallonsNeeded);
+
+    setTotals({...totals, materialTotal: gallonsNeeded});
   };
 
   const handleReset = () => {
-    setCalculated(0);
+    setTotals({...totals, materialTotal: 0});
     setLength(0);
     setWidth(0);
     setSqftGal(0);
@@ -53,7 +55,7 @@ const Material = () => {
       </div>
       <button onClick={handleCalculate}>Calculate</button>
       <button onClick={handleReset}>Reset</button>
-      <p>{calculated} gallons required</p>
+      <p>{totals.materialTotal} gallons required</p>
     </div>
   );
 };

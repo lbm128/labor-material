@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
+import { TotalsContext } from "../App";
 
 const Labor = () => {
-  const [calculated, setCalculated] = useState(0);
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
   const [price, setPrice] = useState(0);
+  const [totals, setTotals] = useContext(TotalsContext);
 
   const handleCalculate = () => {
-    setCalculated(length * width * price);
+    const calculatedTotal = (length * width * price).toFixed(2);
+
+    setTotals({...totals, laborTotal: calculatedTotal});
   };
 
   const handleReset = () => {
-    setCalculated(0);
+    // setCalculated(0);
+    setTotals({...totals, laborTotal: 0});
     setLength(0);
     setWidth(0);
     setPrice(0);
@@ -52,7 +56,7 @@ const Labor = () => {
       </div>
       <button onClick={handleCalculate}>Calculate</button>
       <button onClick={handleReset}>Reset</button>
-      <p>Labor price: ${calculated}</p>
+      <p>Labor price: ${totals.laborTotal}</p>
     </div>
   );
 };
