@@ -15,7 +15,6 @@ const Labor = () => {
   };
 
   const handleReset = () => {
-    // setCalculated(0);
     setTotals({...totals, laborTotal: 0});
     setLength(0);
     setWidth(0);

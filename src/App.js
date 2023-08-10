@@ -8,11 +8,12 @@ import Material from './components/Material';
 export const TotalsContext = createContext();
 
 function App() {
-  const [totals, setTotals] = useState({ laborTotal: 0, materialTotal: 0});
+  const initialState = { laborTotal: 0, materialTotal: 0 };
+  const store = useState(initialState);
 
   return (
     <div className="App">
-      <TotalsContext.Provider value={[totals, setTotals]}>
+      <TotalsContext.Provider value={store}>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
