@@ -63,3 +63,9 @@
 .input-container p {
   width: 70px;
 }
+
+.history-chart {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}

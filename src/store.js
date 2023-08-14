@@ -1,11 +1,15 @@
 import { createStore } from 'redux';
 
-const contextReducer = (state = { laborTotal: 0, materialTotal: 0 }, action) => {
+const contextReducer = (state = { laborHistory: [], materialHistory: [] }, action) => {
   switch (action.type) {
-    case 'LABOR':
-      return { ...state, laborTotal: action.calculatedLaborTotal };
-    case 'MATERIAL':
-      return { ...state, materialTotal: action.calculatedMaterialTotal };
+    case 'LABOR_HISTORY': {
+      state.laborHistory.push(action.calculatedLaborTotal);
+      return state;
+    }
+    case 'MATERIAL_HISTORY': {
+      state.materialHistory.push(action.calculatedMaterialTotal);
+      return state;
+    }
     default:
       return state;
   }

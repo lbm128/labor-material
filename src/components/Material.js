@@ -1,28 +1,27 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Material = () => {
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
   const [sqftGal, setSqftGal] = useState(0);
+  const [calculated, setCalculated] = useState(0);
 
-  const reduxMaterialTotal = useSelector(store => {
-    return store.materialTotal;
-  });
   const dispatch = useDispatch();
 
   const handleCalculate = () => {
     const gallonsNeeded = ((length * width) / sqftGal).toFixed(2);
 
-    dispatch({ type: 'MATERIAL', calculatedMaterialTotal: gallonsNeeded });
+    setCalculated(gallonsNeeded);
+    dispatch({ type: 'MATERIAL_HISTORY', calculatedMaterialTotal: gallonsNeeded });
   };
 
   const handleReset = () => {
-    dispatch({ type: 'MATERIAL', calculatedMaterialTotal: 0 });
     setLength(0);
     setWidth(0);
     setSqftGal(0);
+    setCalculated(0);
   }
 
   const handleLength = (e) => {
@@ -59,7 +58,7 @@ const Material = () => {
       </div>
       <button onClick={handleCalculate}>Calculate</button>
       <button onClick={handleReset}>Reset</button>
-      <p>{reduxMaterialTotal} gallons required</p>
+      <p>{calculated} gallons required</p>
     </div>
   );
 };

@@ -1,28 +1,27 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Labor = () => {
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
   const [price, setPrice] = useState(0);
+  const [calculated, setCalculated] = useState(0);
 
-  const reduxLaborTotal = useSelector(store => {
-    return store.laborTotal;
-  });
   const dispatch = useDispatch();
 
   const handleCalculate = () => {
     const calculatedTotal = (length * width * price).toFixed(2);
 
-    dispatch({ type: 'LABOR', calculatedLaborTotal: calculatedTotal });
+    setCalculated(calculatedTotal);
+    dispatch({ type: 'LABOR_HISTORY', calculatedLaborTotal: calculatedTotal });
   };
 
   const handleReset = () => {
-    dispatch({ type: 'LABOR', calculatedLaborTotal: 0 });
     setLength(0);
     setWidth(0);
     setPrice(0);
+    setCalculated(0);
   }
 
   const handleLength = (e) => {
@@ -59,7 +58,7 @@ const Labor = () => {
       </div>
       <button onClick={handleCalculate}>Calculate</button>
       <button onClick={handleReset}>Reset</button>
-      <p>Labor price: ${reduxLaborTotal}</p>
+      <p>Labor price: ${calculated}</p>
     </div>
   );
 };

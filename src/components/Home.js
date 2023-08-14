@@ -8,6 +8,12 @@ const Home = () => {
   const reduxMaterialTotal = useSelector(store => {
     return store.materialTotal;
   });
+  const laborHistory = useSelector(store => {
+    return store.laborHistory;
+  });
+  const materialHistory = useSelector(store => {
+    return store.materialHistory;
+  });
 
   return (
     <div>
@@ -22,7 +28,17 @@ const Home = () => {
           <span>Material</span>
         </Link>
       </div>
-      <p>Labor Total: ${reduxLaborTotal}, Material Total: {reduxMaterialTotal} gallons</p>
+      {/* <p>Labor Total: ${reduxLaborTotal}, Material Total: {reduxMaterialTotal} gallons</p> */}
+      <div className='history-chart'>
+        <div>
+          <p><b>Labor History</b></p>
+          {laborHistory.map((entry, i) => <p key={i}>${entry}</p>)}
+        </div>
+        <div>
+          <p><b>Material History</b></p>
+          {materialHistory.map((entry, i) => <p key={i}>{entry} gallons</p>)}
+        </div>
+      </div>
     </div>
   );
 };
