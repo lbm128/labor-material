@@ -1,21 +1,25 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
-import { TotalsContext } from "../App";
+import { useSelector, useDispatch } from 'react-redux';
 
 const Labor = () => {
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
   const [price, setPrice] = useState(0);
-  const [totals, setTotals] = useContext(TotalsContext);
+
+  const reduxLaborTotal = useSelector(store => {
+    return store.laborTotal;
+  });
+  const dispatch = useDispatch();
 
   const handleCalculate = () => {
     const calculatedTotal = (length * width * price).toFixed(2);
 
-    setTotals({...totals, laborTotal: calculatedTotal});
+    dispatch({ type: 'LABOR', calculatedLaborTotal: calculatedTotal });
   };
 
   const handleReset = () => {
-    setTotals({...totals, laborTotal: 0});
+    dispatch({ type: 'LABOR', calculatedLaborTotal: 0 });
     setLength(0);
     setWidth(0);
     setPrice(0);
@@ -43,21 +47,21 @@ const Labor = () => {
       <h1>Labor</h1>
       <div className="input-container">
         <p>$/sqft</p>
-        <input value={price} onChange={handlePrice}/>
+        <input value={price} onChange={handlePrice} />
       </div>
       <div className="input-container">
         <p>Length</p>
-        <input value={length} onChange={handleLength}/>
+        <input value={length} onChange={handleLength} />
       </div>
       <div className="input-container">
         <p>Width</p>
-        <input value={width} onChange={handleWidth}/>
+        <input value={width} onChange={handleWidth} />
       </div>
       <button onClick={handleCalculate}>Calculate</button>
       <button onClick={handleReset}>Reset</button>
-      <p>Labor price: ${totals.laborTotal}</p>
+      <p>Labor price: ${reduxLaborTotal}</p>
     </div>
   );
 };
-  
+
 export default Labor;

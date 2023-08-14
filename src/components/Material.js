@@ -1,21 +1,25 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
-import { TotalsContext } from "../App";
+import { useSelector, useDispatch } from 'react-redux';
 
 const Material = () => {
   const [length, setLength] = useState(0);
   const [width, setWidth] = useState(0);
   const [sqftGal, setSqftGal] = useState(0);
-  const [totals, setTotals] = useContext(TotalsContext);
+
+  const reduxMaterialTotal = useSelector(store => {
+    return store.materialTotal;
+  });
+  const dispatch = useDispatch();
 
   const handleCalculate = () => {
     const gallonsNeeded = ((length * width) / sqftGal).toFixed(2);
 
-    setTotals({...totals, materialTotal: gallonsNeeded});
+    dispatch({ type: 'MATERIAL', calculatedMaterialTotal: gallonsNeeded });
   };
 
   const handleReset = () => {
-    setTotals({...totals, materialTotal: 0});
+    dispatch({ type: 'MATERIAL', calculatedMaterialTotal: 0 });
     setLength(0);
     setWidth(0);
     setSqftGal(0);
@@ -43,21 +47,21 @@ const Material = () => {
       <h1>Material</h1>
       <div className="input-container">
         <p>sqft/gallon</p>
-        <input value={sqftGal} onChange={handleSqftGal}/>
+        <input value={sqftGal} onChange={handleSqftGal} />
       </div>
       <div className="input-container">
         <p>Length</p>
-        <input value={length} onChange={handleLength}/>
+        <input value={length} onChange={handleLength} />
       </div>
       <div className="input-container">
         <p>Width</p>
-        <input value={width} onChange={handleWidth}/>
+        <input value={width} onChange={handleWidth} />
       </div>
       <button onClick={handleCalculate}>Calculate</button>
       <button onClick={handleReset}>Reset</button>
-      <p>{totals.materialTotal} gallons required</p>
+      <p>{reduxMaterialTotal} gallons required</p>
     </div>
   );
 };
-  
+
 export default Material;

@@ -1,19 +1,16 @@
 import './App.css';
-import { useState, createContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import Labor from './components/Labor';
 import Material from './components/Material';
 
-export const TotalsContext = createContext();
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
-  const initialState = { laborTotal: 0, materialTotal: 0 };
-  const store = useState(initialState);
-
   return (
     <div className="App">
-      <TotalsContext.Provider value={store}>
+      <Provider store={store}>
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -21,7 +18,7 @@ function App() {
             <Route path="/material" element={<Material />} />
           </Routes>
         </Router>
-      </TotalsContext.Provider>
+      </Provider>
     </div>
   );
 }
