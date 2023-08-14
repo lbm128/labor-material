@@ -10,11 +10,17 @@ const Labor = () => {
 
   const dispatch = useDispatch();
 
-  const handleCalculate = () => {
+  const handleCalculateThunk = () => dispatch => {
+    // API call
     const calculatedTotal = (length * width * price).toFixed(2);
-
     setCalculated(calculatedTotal);
-    dispatch({ type: 'LABOR_HISTORY', calculatedLaborTotal: calculatedTotal });
+
+    dispatch({ type: 'LABOR_HISTORY', calculatedLaborTotal: calculatedTotal })
+  };
+
+  const handleCalculate = () => {
+    
+    dispatch(handleCalculateThunk());
   };
 
   const handleReset = () => {

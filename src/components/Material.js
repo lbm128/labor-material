@@ -10,11 +10,15 @@ const Material = () => {
 
   const dispatch = useDispatch();
 
-  const handleCalculate = () => {
+  const handleCalculateThunk = () => dispatch => {
     const gallonsNeeded = ((length * width) / sqftGal).toFixed(2);
-
     setCalculated(gallonsNeeded);
+
     dispatch({ type: 'MATERIAL_HISTORY', calculatedMaterialTotal: gallonsNeeded });
+  };
+
+  const handleCalculate = () => {
+    dispatch(handleCalculateThunk());
   };
 
   const handleReset = () => {

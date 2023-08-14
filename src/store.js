@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 const contextReducer = (state = { laborHistory: [], materialHistory: [] }, action) => {
   switch (action.type) {
@@ -15,4 +17,4 @@ const contextReducer = (state = { laborHistory: [], materialHistory: [] }, actio
   }
 }
 
-export default createStore(contextReducer);
+export default createStore(contextReducer, undefined, applyMiddleware(logger, thunk));
