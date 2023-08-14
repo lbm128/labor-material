@@ -1,20 +1,36 @@
-import { createStore, applyMiddleware } from 'redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-const contextReducer = (state = { laborHistory: [], materialHistory: [] }, action) => {
-  switch (action.type) {
-    case 'LABOR_HISTORY': {
-      state.laborHistory.push(action.calculatedLaborTotal);
-      return state;
+const laborSlice = createSlice({
+  name: 'labor',
+  initialState: { laborHistory: [] },
+  reducers: {
+    addLaborHistory (state, action) {
+      state.laborHistory.push(action.payload);
     }
-    case 'MATERIAL_HISTORY': {
-      state.materialHistory.push(action.calculatedMaterialTotal);
-      return state;
-    }
-    default:
-      return state;
   }
-}
+});
 
-export default createStore(contextReducer, undefined, applyMiddleware(logger, thunk));
+export const laborActions = laborSlice.actions;
+
+const materialSlice = createSlice({
+  name: 'material',
+  initialState: { materialHistory: [] },
+  reducers: {
+    addMaterialHistory (state, action) {
+      state.materialHistory.push(action.payload);
+    }
+  }
+});
+
+export const materialActions = materialSlice.actions;
+
+export default configureStore({
+  reducer: {
+    labor: laborSlice.reducer,
+    material: materialSlice.reducer
+  },
+  middleware: [logger, thunk],
+  devTools: true
+});

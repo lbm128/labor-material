@@ -2,17 +2,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 const Home = () => {
-  const reduxLaborTotal = useSelector(store => {
-    return store.laborTotal;
+  const laborHistory = useSelector(({labor}) => {
+    return labor.laborHistory;
   });
-  const reduxMaterialTotal = useSelector(store => {
-    return store.materialTotal;
-  });
-  const laborHistory = useSelector(store => {
-    return store.laborHistory;
-  });
-  const materialHistory = useSelector(store => {
-    return store.materialHistory;
+  const materialHistory = useSelector(({material}) => {
+    return material.materialHistory;
   });
 
   return (

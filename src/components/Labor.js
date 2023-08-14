@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { laborActions } from '../store';
 
 const Labor = () => {
   const [length, setLength] = useState(0);
@@ -15,7 +16,7 @@ const Labor = () => {
     const calculatedTotal = (length * width * price).toFixed(2);
     setCalculated(calculatedTotal);
 
-    dispatch({ type: 'LABOR_HISTORY', calculatedLaborTotal: calculatedTotal })
+    dispatch(laborActions.addLaborHistory(calculatedTotal))
   };
 
   const handleCalculate = () => {

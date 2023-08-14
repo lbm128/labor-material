@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { materialActions } from '../store';
 
 const Material = () => {
   const [length, setLength] = useState(0);
@@ -14,7 +15,7 @@ const Material = () => {
     const gallonsNeeded = ((length * width) / sqftGal).toFixed(2);
     setCalculated(gallonsNeeded);
 
-    dispatch({ type: 'MATERIAL_HISTORY', calculatedMaterialTotal: gallonsNeeded });
+    dispatch(materialActions.addMaterialHistory(gallonsNeeded));
   };
 
   const handleCalculate = () => {
