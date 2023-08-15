@@ -1,12 +1,27 @@
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import axios from "axios";
+import { laborActions, materialActions } from "../store";
 
 const Home = () => {
-  const laborHistory = useSelector(({labor}) => {
+  const laborHistory = useSelector(({ labor }) => {
     return labor.laborHistory;
   });
-  const materialHistory = useSelector(({material}) => {
+  const materialHistory = useSelector(({ material }) => {
     return material.materialHistory;
+  });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get('/laborHistory')
+      .then(({ data }) => dispatch(laborActions.loadLaborHistory({ laborHistory: data })));
+
+    axios
+      .get('/materialHistory')
+      .then(({ data }) => dispatch(materialActions.loadMaterialHistory({ materialHistory: data })));
   });
 
   return (
