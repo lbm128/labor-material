@@ -1,17 +1,11 @@
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
 
 const port = 4000;
 const app = express();
 app.use(express.json());
 
-let todos = [];
 let laborHistory = [];
 let materialHistory = [];
-
-app.get('/todos', (_, res) => {
-  res.json(todos);
-});
 
 app.get('/laborHistory', (_, res) => {
   res.json(laborHistory);
@@ -21,16 +15,26 @@ app.get('/materialHistory', (_, res) => {
   res.json(materialHistory);
 });
 
-app.post('/todo', (req, res) => {
-  const { name } = req.body;
-  if (!name) {
+app.post('/addLabor', (req, res) => {
+  const { calculatedTotal } = req.body;
+  if (!calculatedTotal) {
     return res.status(400).end;
   }
 
-  const todo = { name, id: uuidv4() };
-  todos.push(todo);
+  laborHistory.push(calculatedTotal);
 
-  res.json(todo);
+  res.json(calculatedTotal);
+});
+
+app.post('/addMaterial', (req, res) => {
+  const { calculatedTotal } = req.body;
+  if (!calculatedTotal) {
+    return res.status(400).end;
+  }
+
+  materialHistory.push(calculatedTotal);
+
+  res.json(calculatedTotal);
 });
 
 app.delete('/todo', (req, res) => {

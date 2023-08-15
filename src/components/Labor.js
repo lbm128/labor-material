@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { laborActions } from '../store';
+import { addLabor } from '../thunks/laborThunk';
 
 const Labor = () => {
   const [length, setLength] = useState(0);
@@ -11,17 +11,11 @@ const Labor = () => {
 
   const dispatch = useDispatch();
 
-  const handleCalculateThunk = () => dispatch => {
-    // API call
+  const handleCalculate = () => {
     const calculatedTotal = (length * width * price).toFixed(2);
     setCalculated(calculatedTotal);
 
-    dispatch(laborActions.addLaborHistory(calculatedTotal))
-  };
-
-  const handleCalculate = () => {
-    
-    dispatch(handleCalculateThunk());
+    dispatch(addLabor({calculatedTotal}));
   };
 
   const handleReset = () => {
