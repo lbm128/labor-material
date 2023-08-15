@@ -22,7 +22,6 @@ const Home = () => {
           <span>Material</span>
         </Link>
       </div>
-      {/* <p>Labor Total: ${reduxLaborTotal}, Material Total: {reduxMaterialTotal} gallons</p> */}
       <div className='history-chart'>
         <div>
           <p><b>Labor History</b></p>

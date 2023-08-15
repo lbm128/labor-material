@@ -6,9 +6,19 @@ const app = express();
 app.use(express.json());
 
 let todos = [];
+let laborHistory = [];
+let materialHistory = [];
 
 app.get('/todos', (_, res) => {
   res.json(todos);
+});
+
+app.get('/laborHistory', (_, res) => {
+  res.json(laborHistory);
+});
+
+app.get('/materialHistory', (_, res) => {
+  res.json(materialHistory);
 });
 
 app.post('/todo', (req, res) => {
