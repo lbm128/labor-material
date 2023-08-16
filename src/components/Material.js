@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { addMaterial } from '../thunks/materialThunk';
+import { addMaterial } from '../store/thunks/materialThunk';
 
 const Material = () => {
   const [length, setLength] = useState(0);

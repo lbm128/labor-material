@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { addLabor } from '../thunks/laborThunk';
+import { addLabor } from '../store/thunks/laborThunk';
 
 const Labor = () => {
   const [length, setLength] = useState(0);
