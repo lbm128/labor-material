@@ -1,8 +1,7 @@
-import axios from "axios";
 import { materialActions } from "../index";
+import { addMaterialApi } from "../../api/material";
 
 export const addMaterial = ({ calculatedTotal }) => (dispatch) => {
-  axios
-    .post('/addMaterial', { calculatedTotal })
+  addMaterialApi({ calculatedTotal })
     .then(({ data }) => { dispatch(materialActions.addMaterialHistory(data)) });
 };

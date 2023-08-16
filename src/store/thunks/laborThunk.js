@@ -1,8 +1,7 @@
-import axios from "axios";
 import { laborActions } from "../index";
+import { addLaborApi } from "../../api/labor";
 
 export const addLabor = ({ calculatedTotal }) => (dispatch) => {
-  axios
-    .post('/addLabor', { calculatedTotal })
+  addLaborApi({ calculatedTotal })
     .then(({ data }) => { dispatch(laborActions.addLaborHistory(data)) });
 };

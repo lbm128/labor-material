@@ -5,7 +5,7 @@ import Labor from './components/Labor';
 import Material from './components/Material';
 
 import { Provider } from 'react-redux';
-import store from './store/index';
+import store from './store';
 
 function App() {
   return (
