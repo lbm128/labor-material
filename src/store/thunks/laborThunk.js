@@ -1,5 +1,5 @@
 import axios from "axios";
-import { laborActions } from "../store";
+import { laborActions } from "../index";
 
 export const addLabor = ({ calculatedTotal }) => (dispatch) => {
   axios

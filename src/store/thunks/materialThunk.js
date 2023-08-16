@@ -1,5 +1,5 @@
 import axios from "axios";
-import { materialActions } from "../store";
+import { materialActions } from "../index";
 
 export const addMaterial = ({ calculatedTotal }) => (dispatch) => {
   axios
