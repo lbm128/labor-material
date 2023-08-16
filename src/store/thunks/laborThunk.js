@@ -1,4 +1,4 @@
-import { laborActions } from "../index";
+import { laborActions } from "../slices/laborSlice";
 import { addLaborApi, loadLaborApi } from "../../api/labor";
 
 export const addLabor = ({ calculatedTotal }) => (dispatch) => {

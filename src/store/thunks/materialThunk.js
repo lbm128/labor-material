@@ -1,4 +1,4 @@
-import { materialActions } from "../index";
+import { materialActions } from "../slices/materialSlice";
 import { addMaterialApi, loadMaterialApi } from "../../api/material";
 
 export const addMaterial = ({ calculatedTotal }) => (dispatch) => {
