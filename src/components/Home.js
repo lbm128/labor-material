@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
-import axios from "axios";
-import { laborActions, materialActions } from "../store";
+import { loadLabor } from "../store/thunks/laborThunk";
+import { loadMaterial } from "../store/thunks/materialThunk";
 
 const Home = () => {
   const laborHistory = useSelector(({ labor }) => {
@@ -15,13 +15,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get('/laborHistory')
-      .then(({ data }) => dispatch(laborActions.loadLaborHistory({ laborHistory: data })));
-
-    axios
-      .get('/materialHistory')
-      .then(({ data }) => dispatch(materialActions.loadMaterialHistory({ materialHistory: data })));
+    dispatch(loadLabor());
+    dispatch(loadMaterial());
   }, []);
 
   return (
